@@ -1,0 +1,131 @@
+#CPAN;                Debian;                       Fedora
+App::Ack
+App::Nopaste
+App::cpanminus;       -;
+CGI::FormBuilder::Source::Perl
+CHI
+CPAN::Uploader
+Cache
+Cache::File
+Cache::Memcached::Fast
+Carp::Always
+Catalyst
+Config::Any
+Config::General
+Config::Tiny
+Crypt::PBKDF2
+DBD::CSV
+DBD::CSV_XS
+DBD::mysql
+DBI
+DBIx::Class::Schema::Loader
+DBIx::Connector
+Daemon::Control
+Dancer
+Dancer2
+Date::Tiny
+DateTime
+DateTime::Tiny
+Devel::Cover
+Devel::NYTProf
+Devel::REPL
+Devel::hdb
+Digest::MD5
+Digest::SHA
+Dist::Zilla
+Email::MIME::Kit
+Email::Sender
+Email::Simple
+Email::Valid
+Excel::Writer::XLSX
+Flickr::API
+HTML::Entities
+HTML::TableExtract
+HTML::Template
+HTTP::Lite
+HTTP::Request
+HTTP::Tiny
+IO::All
+IO::Compress::Gzip
+IO::Uncompress::Gunzip
+Image::ExifTool
+Imager
+JSON
+LWP::Protocol::https
+LWP::UserAgent
+LWP::UserAgent::Determined
+Log::Contextual;     liblog-contextual-perl;
+Log::Dispatch;       liblog-dispatch-perl;
+Log::Log4perl;       liblog-log4perl-perl;
+MIME::Types
+Mock::Quick
+Module::CoreList
+Module::Version
+Mojolicious
+MongoDB
+Moo
+MooX
+MooX::Options;          -;
+MooX::Singleton;        -;
+MooX::Types::CLike;     -;
+MooX::Types::MooseLike; -;
+MooX::late;             -;
+Moose
+Net::Server;         libnet-server-perl;
+Net::Whois::Raw;
+PDF::Create
+POE
+Path::Iterator::Rule
+Path::Tiny
+Perl::Critic
+Perl::Critic::Bangs
+Perl::Tidy
+Perl::Version
+Plack
+Plack::Middleware::Debug
+Plack::Middleware::LogErrors
+Plack::Middleware::LogWarn
+Pod::Readme
+SQL::Translator
+Smart::Comments
+Software::License
+Spreadsheet::ParseExcel::Simple
+Spreadsheet::WriteExcel
+Spreadsheet::WriteExcel::Simple
+Starman
+Storable
+Template::Toolkit
+Term::ProgressBar::Simple
+Test::Deep
+Test::Fatal;         libtest-fast-perl;
+Test::Memory::Cycle
+Test::More
+Test::Most;          libtest-most-perl;
+Test::NoWarnings
+Test::Perl::Critic
+Test::Pod::Coverage; libtest-pod-coverage-perl;
+Test::Pod;           libtest-pod-perl
+Test::Requires
+Test::Simple;        libtest-simple-perl;
+Test::WWW::Mechanize
+Text::CSV_XS
+Time::HiRes
+Time::ParseDate
+Time::Tiny
+Try::Tiny
+TryCatch
+URI::Encode
+WWW::Mechanize::TreeBuilder
+XML::Atom
+XML::Entities
+XML::Generator::PerlData
+XML::LibXML
+XML::LibXSLT
+XML::RSS
+XML::SAX
+XML::SAX::Writer
+XML::Simple
+XML::XPath
+YAML
+local::lib;          liblocal-lib-perl;
+version;             libversion-perl;
