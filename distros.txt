@@ -1,31 +1,31 @@
-#CPAN;                Debian;                       Fedora
-App::Ack
-App::Nopaste
-App::cpanminus;       -;
-CGI::FormBuilder::Source::Perl
-CHI
-CPAN::Uploader
-Cache
-Cache::File
-Cache::Memcached::Fast
-Carp::Always
-Catalyst
-Config::Any
-Config::General
-Config::Tiny
-Crypt::PBKDF2
-DBD::CSV
-DBD::CSV_XS
-DBD::mysql
-DBI
-DBIx::Class::Schema::Loader
-DBIx::Connector
-Daemon::Control
-Dancer
-Dancer2
-Date::Tiny
-DateTime
-DateTime::Tiny
+#CPAN;                          Debian;                       Fedora
+App::Ack;                       ack-grep;
+App::Nopaste;                   libapp-nopaste-perl;
+App::cpanminus;                 -;
+CGI::FormBuilder::Source::Perl; -;
+CHI;                            libchi-perl;
+CPAN::Uploader;                 libcpan-uploader-perl;
+Cache;                          libcache-perl
+Cache::Memcached::Fast;         libcache-memcached-fast-perl
+Carp::Always;                   libcarp-always-perl;
+Catalyst;                       libcatalyst-perl;
+Config::Any;                    libconfig-any-perl;
+Config::General;                libconfig-general-perl;
+Config::Tiny;                   libconfig-tiny-perl;
+Crypt::PBKDF2;                  -;
+DBD::CSV;                       libdbd-csv-perl;
+DBD::mysql;                     libdbd-mysql-perl;
+DBD::Pg;                        libdbd-pg-perl;
+DBI;                            libdbi-perl;
+DBIx::Class;                    libdbix-class-perl;
+DBIx::Class::Schema::Loader;    -;
+DBIx::Connector;                libdbix-connector-perl;
+Daemon::Control;                libdaemon-control-perl;
+Dancer;                         libdancer-perl;
+Dancer2;                        +;
+Date::Tiny;
+DateTime;
+DateTime::Tiny;
 Devel::Cover
 Devel::NYTProf
 Devel::REPL
@@ -65,8 +65,8 @@ Mojolicious
 MongoDB
 Moo
 MooX
-MooX::Options;          -;
-MooX::Singleton;        -;
+MooX::Options;          Bug#730606;
+MooX::Singleton;        Bug#730608;
 MooX::Types::CLike;     -;
 MooX::Types::MooseLike; -;
 MooX::late;             -;
