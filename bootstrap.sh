@@ -1,13 +1,21 @@
 
 # set up environment variables
 PERL_VERSION=5.18.1
-PERL_ZIP_FILE=perl-$PERL_VERSION.tar.gz
-ROOT=/opt/dwimperl-$PERL_VERSION
-PREFIX_PERL=/opt/dwimperl-$PERL_VERSION/perl
-PREFIX_C=/opt/dwimperl-$PERL_VERSION/c
+SUBVERSION=1
+ARCHITECTURE=`uname -i`
+
+PERL_SOURCE_VERSION=perl-$PERL_VERSION
+PERL_SOURCE_ZIP_FILE=$PERL_SOURCE_VERSION.tar.gz
+
+DWIMPERL_VERSION=dwimperl-$PERL_VERSION-$SUBVERSION-$ARCHITECTURE
+ROOT=/opt/$DWIMPERL_VERSION
+PREFIX_PERL=/opt/$DWIMPERL_VERSION/perl
+PREFIX_C=/opt/$DWIMPERL_VERSION/c
+
 BUILD_HOME=`pwd`
 ORIGINAL_PATH=$PATH
 TEST_DIR=/opt/myperl
+BACKUP=/opt/dwimperl
 
 
 if [ -d $TEST_DIR ]; then
@@ -16,7 +24,7 @@ if [ -d $TEST_DIR ]; then
 fi
 
 #echo $BUILD_HOME
-#echo $PERL_ZIP_FILE
+#echo $PERL_SOURCE_ZIP_FILE
 
 # install compiler
 gcc --version 2>/dev/null >/dev/null
@@ -56,15 +64,16 @@ fi
 
 # download and install perl
 if [ ! -d $PREFIX_PERL ]; then
-    if [ ! -f $PERL_ZIP_FILE ]; then
-        wget http://www.cpan.org/src/5.0/$PERL_ZIP_FILE
+    if [ ! -f $PERL_SOURCE_ZIP_FILE ]; then
+        wget http://www.cpan.org/src/5.0/$PERL_SOURCE_ZIP_FILE
     fi
     
-    if [ !  -d perl-$PERL_VERSION ]; then
-        tar xzf perl-$PERL_VERSION.tar.gz
+    if [ !  -d $PERL_SOURCE_VERSION ]; then
+        tar xzf $PERL_SOURCE_ZIP_FILE
+        #$PERL_SOURCE_VERSION.tar.gz
     fi
     
-    cd perl-$PERL_VERSION
+    cd $PERL_SOURCE_VERSION
     ./Configure -des -Duserelocatableinc -Dprefix=$PREFIX_PERL
     make
     make test
@@ -101,8 +110,16 @@ cpanm Test::WWW::Mechanize
 cpanm Flickr::API
 cpanm Path::Tiny
 cpanm Config::Tiny
+cpanm DateTime
 cpanm Digest::SHA
 cpanm Digest::SHA1
+cpanm DBI
+cpanm DBD::SQLite
+
+cpanm Moo
+cpanm MooX::Options
+cpanm MooX::late
+
 
 cpanm XML::NamespaceSupport
 cpanm XML::SAX
@@ -116,16 +133,28 @@ fi
 prove $ROOT/t
 
 cd '/opt';
-tar czf dwimperl-$PERL_VERSION.tar.gz dwimperl-$PERL_VERSION
+tar czf $DWIMPERL_VERSION.tar.gz $DWIMPERL_VERSION
 
 # testing it in another directory
+mv $ROOT $BACKUP
 
 mkdir $TEST_DIR
 cd $TEST_DIR
-tar xzf /opt/dwimperl-$PERL_VERSION.tar.gz
-export PATH=$TEST_DIR/dwimperl-$PERL_VERSION/perl/bin:$ORIGINAL_PATH
-prove $TEST_DIR/dwimperl-$PERL_VERSION/t
+tar xzf /opt/$DWIMPERL_VERSION.tar.gz
+export PATH=$TEST_DIR/$DWIMPERL_VERSION/perl/bin:$ORIGINAL_PATH
+
+# TODO: replace the sh-bang in all the files after relocation
+# otherwise this will not work:
+# prove $TEST_DIR/$DWIMPERL_VERSION/t
+
+# Convince perl to look for the libxml2 files in the directory relative to its location
+# Warning: program compiled against libxml 209 using older 207
+# Warning: XML::LibXML compiled against libxml2 20901, but runtime libxml2 is older 20706
+
+perl $TEST_DIR/$DWIMPERL_VERSION/perl/bin/prove $TEST_DIR/$DWIMPERL_VERSION/t
 cd $BUILD_HOME
 rm -rf $TEST_DIR
+
+mv $BACKUP $ROOT
 
 
