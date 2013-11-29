@@ -27,6 +27,7 @@ fi
 #echo $PERL_SOURCE_ZIP_FILE
 
 # install compiler
+# gcc and make are needed for Perl
 gcc --version 2>/dev/null >/dev/null
 if [ ! $? ]; then
     yes | yum install gcc
@@ -37,7 +38,13 @@ if [ ! $? ]; then
     yes | yum install make
 fi
 
+# cmake is needed for MySQL
+cmake --version 2>/dev/null >/dev/null
+if [ ! $? ]; then
+    yes | yum install cmake
+fi
 
+# libxml2 and zlib are needed for XML::LibXML
 # See http://xmlsoft.org/
 if [ ! -f $PREFIX_C/lib/libxml2.a ]; then
     LIBXML_VERSION=2.9.1
@@ -81,6 +88,13 @@ if [ ! -d $PREFIX_PERL ]; then
     cd $BUILD_HOME
 fi
 
+
+# MYSQL_VERSION=mysql-5.6.14
+# wget http://dev.mysql.com/get/Downloads/MySQL-5.6/$MYSQL_VERSION.tar.gz
+# tar xzf $MYSQL_VERSION.tar.gz
+# cd $MYSQL_VERSION
+# cmake .
+
 export PATH=$PREFIX_PERL/bin:$ORIGINAL_PATH
 which perl
 perl -v
@@ -95,7 +109,10 @@ if [ ! -f $PREFIX_PERL/bin/cpanm ]; then
 fi
 
 # install the easy modules
+cpanm Test::Deep
 cpanm Test::Exception
+cpanm Test::Fatal
+cpanm Test::Memory::Cycle
 cpanm Test::MockObject
 cpanm Test::More
 cpanm Test::Most
@@ -104,6 +121,7 @@ cpanm Test::Output
 cpanm Test::Perl::Critic
 cpanm Test::Pod
 cpanm Test::Pod::Coverage
+cpanm Test::Requires
 cpanm Test::Script
 cpanm Test::WWW::Mechanize
 
@@ -113,27 +131,51 @@ cpanm Flickr::API
 cpanm Path::Tiny
 #cpanm Cache   (DB_File is not installed)
 cpanm Cache::Memcached::Fast
+cpanm Catalyst
 cpanm Carp::Always
 cpanm Config::Tiny
 cpanm Config::Any
 cpanm Config::General
 cpanm Config::Tiny
+cpanm Date::Tiny
 cpanm DateTime
+cpanm DateTime::Tiny
+
 cpanm Digest::SHA
 cpanm Digest::SHA1
 cpanm DBI
 cpanm DBIx::Class
 cpanm DBIx::Connector
 cpanm DBD::SQLite
+#cpanm DBD::mysql
 cpanm Daemon::Control
 
 cpanm Dancer2
 
+#cpanm Net::SSLeay
+#cpanm LWP::Protocol::https
+cpanm LWP::UserAgent
+cpanm LWP::UserAgent::Determined
 
 cpanm Moo
 cpanm MooX::Options
 cpanm MooX::late
+cpanm MooX::Singleton
 
+cpanm Mojolicious
+cpanm Moose
+cpanm Net::Server
+cpanm IO::Compress::Gzip
+cpanm IO::Uncompress::Gunzip
+
+cpanm Plack
+cpanm Plack::Middleware::Debug
+cpanm Plack::Middleware::LogErrors
+cpanm Plack::Middleware::LogWarn
+
+cpanm Log::Contextual
+cpanm Log::Dispatch
+cpanm Log::Log4perl
 
 cpanm XML::NamespaceSupport
 cpanm XML::SAX

@@ -3,15 +3,10 @@ App::cpanminus;                 -;
 CGI::FormBuilder::Source::Perl; -;
 CHI;                            libchi-perl;
 CPAN::Uploader;                 libcpan-uploader-perl;
-Catalyst;                       libcatalyst-perl;
 Crypt::PBKDF2;                  -;
 DBD::CSV;                       libdbd-csv-perl;
-DBD::mysql;                     libdbd-mysql-perl;
 DBD::Pg;                        libdbd-pg-perl;
 DBIx::Class::Schema::Loader;    -;
-Date::Tiny;
-DateTime;
-DateTime::Tiny;
 Devel::Cover
 Devel::NYTProf
 Devel::REPL
@@ -32,32 +27,17 @@ HTTP::Lite
 HTTP::Request
 HTTP::Tiny
 IO::All
-IO::Compress::Gzip
-IO::Uncompress::Gunzip
 Image::ExifTool
 Imager
 JSON
-LWP::Protocol::https
-LWP::UserAgent
-LWP::UserAgent::Determined
-Log::Contextual;     liblog-contextual-perl;
-Log::Dispatch;       liblog-dispatch-perl;
-Log::Log4perl;       liblog-log4perl-perl;
 MIME::Types
 Mock::Quick
 Module::CoreList
 Module::Version
-Mojolicious
 MongoDB
-Moo
-MooX
-MooX::Options;          Bug#730606;
-MooX::Singleton;        Bug#730608;
 MooX::Types::CLike;     -;
 MooX::Types::MooseLike; -;
 MooX::late;             -;
-Moose
-Net::Server;         libnet-server-perl;
 Net::Whois::Raw;
 PDF::Create
 POE
@@ -67,10 +47,6 @@ Perl::Critic
 Perl::Critic::Bangs
 Perl::Tidy
 Perl::Version
-Plack
-Plack::Middleware::Debug
-Plack::Middleware::LogErrors
-Plack::Middleware::LogWarn
 Pod::Readme
 SQL::Translator
 Smart::Comments
@@ -82,18 +58,6 @@ Starman
 Storable
 Template::Toolkit
 Term::ProgressBar::Simple
-Test::Deep
-Test::Fatal;         libtest-fast-perl;
-Test::Memory::Cycle
-Test::More
-Test::Most;          libtest-most-perl;
-Test::NoWarnings
-Test::Perl::Critic
-Test::Pod::Coverage; libtest-pod-coverage-perl;
-Test::Pod;           libtest-pod-perl
-Test::Requires
-Test::Simple;        libtest-simple-perl;
-Test::WWW::Mechanize
 Text::CSV_XS
 Time::HiRes
 Time::ParseDate
