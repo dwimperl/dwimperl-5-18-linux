@@ -69,6 +69,34 @@ if [ ! -f $PREFIX_C/lib/libz.a ]; then
     cd $BUILD_HOME
 fi
 
+
+# http://www.openssl.org/
+# openssl is needed by Net::SSLEay which is needed by LWP::Protocol::https
+if [ ! -f $PREFIX_C/lib/libssl.a ]; then
+    wget http://www.openssl.org/source/openssl-1.0.1e.tar.gz
+    tar xzf openssl-1.0.1e.tar.gz
+    cd openssl-1.0.1e
+    
+    # instead of patching broken PODs that cause "make install" to fail
+    #perl -i -p -e 's/^=item \d/=item */' doc/apps/cms.pod doc/apps/smime.pod
+    #perl -i -p -e 'print "=back\n\n" if $.==281' doc/crypto/X509_STORE_CTX_get_error.pod
+    # ... more patching is needed
+    # we just remove them:
+    rm -rf doc
+    mkdir doc
+    mkdir doc/apps
+    mkdir doc/crypto
+    mkdir doc/ssl
+    cp $BUILD_HOME/empty.pod doc/apps/
+    cp $BUILD_HOME/empty.pod mkdir doc/crypto/
+    cp $BUILD_HOME/empty.pod mkdir doc/ssl/
+    ./config --prefix=/opt/dwimperl-5.18.1-1-x86_64/c/
+    make
+    make test
+    make install
+fi
+
+
 # download and install perl
 if [ ! -d $PREFIX_PERL ]; then
     if [ ! -f $PERL_SOURCE_ZIP_FILE ]; then
