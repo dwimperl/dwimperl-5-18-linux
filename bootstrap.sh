@@ -5,7 +5,17 @@ PERL_ZIP_FILE=perl-$PERL_VERSION.tar.gz
 ROOT=/opt/dwimperl-$PERL_VERSION
 PREFIX_PERL=/opt/dwimperl-$PERL_VERSION/perl
 PREFIX_C=/opt/dwimperl-$PERL_VERSION/c
+BUILD_HOME=`pwd`
+ORIGINAL_PATH=$PATH
+TEST_DIR=/opt/myperl
 
+
+if [ -d $TEST_DIR ]; then
+    echo $TEST_DIR already exists. Exiting!
+    exit
+fi
+
+#echo $BUILD_HOME
 #echo $PERL_ZIP_FILE
 
 # install compiler
@@ -29,6 +39,7 @@ if [ ! -f $PREFIX_C/lib/libxml2.a ]; then
     ./configure --prefix $PREFIX_C --without-python
     make
     make install
+    cd $BUILD_HOME
 fi
 
 # See http://www.zlib.net/
@@ -40,6 +51,7 @@ if [ ! -f $PREFIX_C/lib/libz.a ]; then
     ./configure --prefix $PREFIX_C
     make
     make install
+    cd $BUILD_HOME
 fi
 
 # download and install perl
@@ -53,21 +65,23 @@ if [ ! -d $PREFIX_PERL ]; then
     fi
     
     cd perl-$PERL_VERSION
-    ./Configure -des -Dprefix=$PREFIX_PERL
+    ./Configure -des -Duserelocatableinc -Dprefix=$PREFIX_PERL
     make
     make test
     make install
+    cd $BUILD_HOME
 fi
 
-export PATH=$PREFIX_PERL/bin:$PATH
+export PATH=$PREFIX_PERL/bin:$ORIGINAL_PATH
 which perl
 perl -v
 
 # install cpan-minus
-# gets stuck??
+# these get stuck, so we check the existance of the file
 #cpanm --version >/dev/null 2>/dev/null
-cpanm  >/dev/null 2>/dev/null
-if [ $? != 1 ]; then
+#cpanm  >/dev/null 2>/dev/null
+#if [ $? != 1 ]; then
+if [ ! -f $PREFIX_PERL/bin/cpanm ]; then
     curl -L http://cpanmin.us | perl - App::cpanminus
 fi
 
@@ -94,8 +108,24 @@ cpanm XML::NamespaceSupport
 cpanm XML::SAX
 
 # LIBRARY_PATH
-#perl Makefile.PL LIBS='-L/opt/libxml/lib/ -L/opt/zlib/lib' INC='-I/opt/libxml/include/libxml2 -I/opt/zlib/include'
-#cpanm XML::LibXML
 cpanm XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"
+
+if [ ! -d $ROOT/t ]; then
+    cp -r $BUILD_HOME/t $ROOT
+fi
+prove $ROOT/t
+
+cd '/opt';
+tar czf dwimperl-$PERL_VERSION.tar.gz dwimperl-$PERL_VERSION
+
+# testing it in another directory
+
+mkdir $TEST_DIR
+cd $TEST_DIR
+tar xzf /opt/dwimperl-$PERL_VERSION.tar.gz
+export PATH=$TEST_DIR/dwimperl-$PERL_VERSION/perl/bin:$ORIGINAL_PATH
+prove $TEST_DIR/dwimperl-$PERL_VERSION/t
+cd $BUILD_HOME
+rm -rf $TEST_DIR
 
 
