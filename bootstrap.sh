@@ -127,6 +127,7 @@ cpanm XML::SAX
 # LIBRARY_PATH
 cpanm XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"
 
+cp $BUILD_HOME/README.txt $ROOT
 if [ ! -d $ROOT/t ]; then
     cp -r $BUILD_HOME/t $ROOT
 fi
@@ -151,7 +152,7 @@ export PATH=$TEST_DIR/$DWIMPERL_VERSION/perl/bin:$ORIGINAL_PATH
 # Warning: program compiled against libxml 209 using older 207
 # Warning: XML::LibXML compiled against libxml2 20901, but runtime libxml2 is older 20706
 
-perl $TEST_DIR/$DWIMPERL_VERSION/perl/bin/prove $TEST_DIR/$DWIMPERL_VERSION/t
+LD_LIBRARY_PATH=$TEST_DIR/$DWIMPERL_VERSION/c/lib perl $TEST_DIR/$DWIMPERL_VERSION/perl/bin/prove $TEST_DIR/$DWIMPERL_VERSION/t
 cd $BUILD_HOME
 rm -rf $TEST_DIR
 
