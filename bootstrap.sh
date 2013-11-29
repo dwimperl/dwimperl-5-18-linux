@@ -108,11 +108,15 @@ cpanm Test::Script
 cpanm Test::WWW::Mechanize
 
 cpanm App::Ack
-#cpanm App::Nopaste
+#cpanm App::Nopaste  (dependency WWW::Pastebin::PastebinCom::Create is missing)
 cpanm Flickr::API
 cpanm Path::Tiny
-#cpanm Cache
+#cpanm Cache   (DB_File is not installed)
 cpanm Cache::Memcached::Fast
+cpanm Carp::Always
+cpanm Config::Tiny
+cpanm Config::Any
+cpanm Config::General
 cpanm Config::Tiny
 cpanm DateTime
 cpanm Digest::SHA
