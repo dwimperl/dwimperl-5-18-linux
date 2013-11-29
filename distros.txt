@@ -1,12 +1,8 @@
 #CPAN;                          Debian;                       Fedora
-App::Ack;                       ack-grep;
-App::Nopaste;                   libapp-nopaste-perl;
 App::cpanminus;                 -;
 CGI::FormBuilder::Source::Perl; -;
 CHI;                            libchi-perl;
 CPAN::Uploader;                 libcpan-uploader-perl;
-Cache;                          libcache-perl
-Cache::Memcached::Fast;         libcache-memcached-fast-perl
 Carp::Always;                   libcarp-always-perl;
 Catalyst;                       libcatalyst-perl;
 Config::Any;                    libconfig-any-perl;
@@ -16,13 +12,7 @@ Crypt::PBKDF2;                  -;
 DBD::CSV;                       libdbd-csv-perl;
 DBD::mysql;                     libdbd-mysql-perl;
 DBD::Pg;                        libdbd-pg-perl;
-DBI;                            libdbi-perl;
-DBIx::Class;                    libdbix-class-perl;
 DBIx::Class::Schema::Loader;    -;
-DBIx::Connector;                libdbix-connector-perl;
-Daemon::Control;                libdaemon-control-perl;
-Dancer;                         libdancer-perl;
-Dancer2;                        +;
 Date::Tiny;
 DateTime;
 DateTime::Tiny;

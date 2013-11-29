@@ -107,14 +107,24 @@ cpanm Test::Pod::Coverage
 cpanm Test::Script
 cpanm Test::WWW::Mechanize
 
+cpanm App::Ack
+#cpanm App::Nopaste
 cpanm Flickr::API
 cpanm Path::Tiny
+#cpanm Cache
+cpanm Cache::Memcached::Fast
 cpanm Config::Tiny
 cpanm DateTime
 cpanm Digest::SHA
 cpanm Digest::SHA1
 cpanm DBI
+cpanm DBIx::Class
+cpanm DBIx::Connector
 cpanm DBD::SQLite
+cpanm Daemon::Control
+
+cpanm Dancer2
+
 
 cpanm Moo
 cpanm MooX::Options
