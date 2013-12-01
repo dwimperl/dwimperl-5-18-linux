@@ -1,3 +1,4 @@
+#!/bin/sh -e
 
 # set up environment variables
 PERL_VERSION=5.18.1
@@ -28,21 +29,26 @@ fi
 
 # install compiler
 # gcc and make are needed for Perl
-gcc --version 2>/dev/null >/dev/null
-if [ ! $? ]; then
-    yes | yum install gcc
-fi
-
-make --version 2>/dev/null >/dev/null
-if [ ! $? ]; then
-    yes | yum install make
-fi
-
 # cmake is needed for MySQL
-cmake --version 2>/dev/null >/dev/null
-if [ ! $? ]; then
-    yes | yum install cmake
-fi
+
+
+echo "Checking gcc"
+gcc --version || {
+    echo "Installing gcc"
+    yes | yum install gcc || { echo "Could not install gcc"; exit 1; }
+}
+
+make --version || {
+    echo "Installing make"
+    yes | yum install make || { echo "Could not install make"; exit 1; }
+}
+
+cmake --version || {
+    echo "Installing cmake"
+    yes | yum install cmake || { echo "Could not install cmake"; exit 1; }
+}
+
+mkdir -p PREFIX_C
 
 # libxml2 and zlib are needed for XML::LibXML
 # See http://xmlsoft.org/
