@@ -1,5 +1,6 @@
 #!/bin/sh -e
 
+
 # set up environment variables
 PERL_VERSION=5.18.1
 SUBVERSION=1
@@ -31,24 +32,40 @@ fi
 # gcc and make are needed for Perl
 # cmake is needed for MySQL
 
-
-echo "Checking gcc"
-gcc --version || {
-    echo "Installing gcc"
-    yes | yum install gcc || { echo "Could not install gcc"; exit 1; }
-}
-
-make --version || {
-    echo "Installing make"
-    yes | yum install make || { echo "Could not install make"; exit 1; }
-}
-
-cmake --version || {
-    echo "Installing cmake"
-    yes | yum install cmake || { echo "Could not install cmake"; exit 1; }
-}
+for tool in gcc make cmake; do
+    echo "Checking $tool"
+    $tool --version || {
+        echo "Installing $tool"
+        yes | yum install $tool || { echo "Could not install $tool"; exit 1; }
+    }
+done
 
 mkdir -p PREFIX_C
+
+# download and install perl
+if [ ! -d $PREFIX_PERL ]; then
+    if [ ! -f $PERL_SOURCE_ZIP_FILE ]; then
+        wget http://www.cpan.org/src/5.0/$PERL_SOURCE_ZIP_FILE
+    fi
+    
+    if [ !  -d $PERL_SOURCE_VERSION ]; then
+        tar xzf $PERL_SOURCE_ZIP_FILE
+        #$PERL_SOURCE_VERSION.tar.gz
+    fi
+    
+    cd $PERL_SOURCE_VERSION
+    ./Configure -des -Duserelocatableinc -Dprefix=$PREFIX_PERL
+    make
+    make test
+    make install
+    cd $BUILD_HOME
+fi
+
+export PATH=$PREFIX_PERL/bin:$ORIGINAL_PATH
+which perl
+perl -v
+
+
 
 # libxml2 and zlib are needed for XML::LibXML
 # See http://xmlsoft.org/
@@ -94,8 +111,8 @@ if [ ! -f $PREFIX_C/lib/libssl.a ]; then
     mkdir doc/crypto
     mkdir doc/ssl
     cp $BUILD_HOME/empty.pod doc/apps/
-    cp $BUILD_HOME/empty.pod mkdir doc/crypto/
-    cp $BUILD_HOME/empty.pod mkdir doc/ssl/
+    cp $BUILD_HOME/empty.pod doc/crypto/
+    cp $BUILD_HOME/empty.pod doc/ssl/
     ./config --prefix=/opt/dwimperl-5.18.1-1-x86_64/c/ -fPIC
     make
     make test
@@ -103,35 +120,12 @@ if [ ! -f $PREFIX_C/lib/libssl.a ]; then
 fi
 
 
-# download and install perl
-if [ ! -d $PREFIX_PERL ]; then
-    if [ ! -f $PERL_SOURCE_ZIP_FILE ]; then
-        wget http://www.cpan.org/src/5.0/$PERL_SOURCE_ZIP_FILE
-    fi
-    
-    if [ !  -d $PERL_SOURCE_VERSION ]; then
-        tar xzf $PERL_SOURCE_ZIP_FILE
-        #$PERL_SOURCE_VERSION.tar.gz
-    fi
-    
-    cd $PERL_SOURCE_VERSION
-    ./Configure -des -Duserelocatableinc -Dprefix=$PREFIX_PERL
-    make
-    make test
-    make install
-    cd $BUILD_HOME
-fi
-
 
 # MYSQL_VERSION=mysql-5.6.14
 # wget http://dev.mysql.com/get/Downloads/MySQL-5.6/$MYSQL_VERSION.tar.gz
 # tar xzf $MYSQL_VERSION.tar.gz
 # cd $MYSQL_VERSION
 # cmake .
-
-export PATH=$PREFIX_PERL/bin:$ORIGINAL_PATH
-which perl
-perl -v
 
 # install cpan-minus
 # these get stuck, so we check the existance of the file
@@ -273,4 +267,6 @@ rm -rf $TEST_DIR
 
 mv $BACKUP $ROOT
 
+
+# Read: http://www.davidpashley.com/articles/writing-robust-shell-scripts/
 
