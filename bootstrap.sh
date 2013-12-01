@@ -1,7 +1,6 @@
 #!/bin/sh -e
 
-
-# set up environment variables
+echo set up environment variables
 PERL_VERSION=5.18.1
 SUBVERSION=1
 ARCHITECTURE=`uname -i`
@@ -19,6 +18,7 @@ ORIGINAL_PATH=$PATH
 TEST_DIR=/opt/myperl
 BACKUP=/opt/dwimperl
 
+echo "export PATH=$PREFIX_PERL/bin:\$PATH" > setpath
 
 if [ -d $TEST_DIR ]; then
     echo $TEST_DIR already exists. Exiting!
@@ -180,12 +180,23 @@ cpanm Daemon::Control
 
 cpanm Dancer2
 
+cpanm Email::MIME::Kit
+cpanm Email::Sender
+cpanm Email::Simple
+
+cpanm IO::Socket::INET6
+cpanm Socket6
+cpanm --notest Net::DNS  # prereq of Email::Valid and test fails
+cpanm Email::Valid
+cpanm Excel::Writer::XLSX
+
 cpanm HTML::Entities
 cpanm HTML::TableExtract
 cpanm HTML::Template
 cpanm HTTP::Lite
 cpanm HTTP::Request
 cpanm HTTP::Tiny
+
 
 cpanm JSON
 
@@ -205,6 +216,7 @@ cpanm Net::Server
 cpanm IO::Compress::Gzip
 cpanm IO::Uncompress::Gunzip
 
+# cpanm PAR::Packer failed
 cpanm Plack
 cpanm Plack::Middleware::Debug
 cpanm Plack::Middleware::LogErrors

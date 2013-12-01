@@ -14,11 +14,6 @@ Devel::hdb
 Digest::MD5
 Digest::SHA
 Dist::Zilla
-Email::MIME::Kit
-Email::Sender
-Email::Simple
-Email::Valid
-Excel::Writer::XLSX
 IO::All
 Image::ExifTool
 Imager
