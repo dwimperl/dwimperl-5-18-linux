@@ -180,6 +180,15 @@ cpanm Daemon::Control
 
 cpanm Dancer2
 
+cpanm HTML::Entities
+cpanm HTML::TableExtract
+cpanm HTML::Template
+cpanm HTTP::Lite
+cpanm HTTP::Request
+cpanm HTTP::Tiny
+
+cpanm JSON
+
 #cpanm Net::SSLeay
 #cpanm LWP::Protocol::https
 cpanm LWP::UserAgent
@@ -200,13 +209,14 @@ cpanm Plack
 cpanm Plack::Middleware::Debug
 cpanm Plack::Middleware::LogErrors
 cpanm Plack::Middleware::LogWarn
+cpanm POE
 
 cpanm Starman
 cpanm Storable
 cpanm Spreadsheet::ParseExcel::Simple
 cpanm Spreadsheet::WriteExcel
 cpanm Spreadsheet::WriteExcel::Simple
-cpanm Template::Toolkit
+cpanm Template
 cpanm Term::ProgressBar::Simple
 cpanm Text::CSV_XS
 cpanm Time::HiRes
@@ -220,6 +230,8 @@ cpanm Log::Log4perl
 
 cpanm XML::NamespaceSupport
 cpanm XML::SAX
+
+cpanm YAML
 
 # LIBRARY_PATH
 cpanm XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"

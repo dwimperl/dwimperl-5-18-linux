@@ -19,17 +19,9 @@ Email::Sender
 Email::Simple
 Email::Valid
 Excel::Writer::XLSX
-Flickr::API
-HTML::Entities
-HTML::TableExtract
-HTML::Template
-HTTP::Lite
-HTTP::Request
-HTTP::Tiny
 IO::All
 Image::ExifTool
 Imager
-JSON
 MIME::Types
 Mock::Quick
 Module::CoreList
@@ -40,7 +32,6 @@ MooX::Types::MooseLike; -;
 MooX::late;             -;
 Net::Whois::Raw;
 PDF::Create
-POE
 Path::Iterator::Rule
 Path::Tiny
 Perl::Critic
@@ -64,6 +55,5 @@ XML::SAX
 XML::SAX::Writer
 XML::Simple
 XML::XPath
-YAML
 local::lib;          liblocal-lib-perl;
 version;             libversion-perl;
