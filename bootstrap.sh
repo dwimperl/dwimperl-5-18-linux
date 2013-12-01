@@ -90,7 +90,7 @@ if [ ! -f $PREFIX_C/lib/libssl.a ]; then
     cp $BUILD_HOME/empty.pod doc/apps/
     cp $BUILD_HOME/empty.pod mkdir doc/crypto/
     cp $BUILD_HOME/empty.pod mkdir doc/ssl/
-    ./config --prefix=/opt/dwimperl-5.18.1-1-x86_64/c/
+    ./config --prefix=/opt/dwimperl-5.18.1-1-x86_64/c/ -fPIC
     make
     make test
     make install
@@ -189,7 +189,7 @@ cpanm HTTP::Tiny
 
 cpanm JSON
 
-#cpanm Net::SSLeay
+#OPENSSL_PREFIX=$PREFIX_C cpanm Net::SSLeay
 #cpanm LWP::Protocol::https
 cpanm LWP::UserAgent
 cpanm LWP::UserAgent::Determined
