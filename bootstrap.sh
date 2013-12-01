@@ -201,6 +201,19 @@ cpanm Plack::Middleware::Debug
 cpanm Plack::Middleware::LogErrors
 cpanm Plack::Middleware::LogWarn
 
+cpanm Starman
+cpanm Storable
+cpanm Spreadsheet::ParseExcel::Simple
+cpanm Spreadsheet::WriteExcel
+cpanm Spreadsheet::WriteExcel::Simple
+cpanm Template::Toolkit
+cpanm Term::ProgressBar::Simple
+cpanm Text::CSV_XS
+cpanm Time::HiRes
+cpanm Time::ParseDate
+cpanm Time::Tiny
+cpanm Try::Tiny
+
 cpanm Log::Contextual
 cpanm Log::Dispatch
 cpanm Log::Log4perl
