@@ -272,6 +272,23 @@ cpanm Plack::Middleware::LogErrors
 cpanm Plack::Middleware::LogWarn
 # cpanm POE   POE-1.358  failed
 
+cpanm CGI::FormBuilder::Source::Perl
+# cpanm XML::RSS needs XML::Parser
+# cpanm XML::Atom needs XML::Parser
+cpanm MIME::Types
+cpanm WWW::Mechanize
+cpanm WWW::Mechanize::TreeBuilder
+cpanm DBIx::Class::Schema::Loader
+# cpanm Dist::Zilla   need Net-SSLeay
+cpanm Perl::Tidy
+cpanm Perl::Critic
+cpanm Modern::Perl
+cpanm Perl::Version
+cpanm Software::License
+cpanm CHI
+
+cpanm Text::Xslate
+
 cpanm Starman
 cpanm Storable
 cpanm Spreadsheet::ParseExcel::Simple
