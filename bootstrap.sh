@@ -221,6 +221,46 @@ cpanm MooX::Singleton
 
 cpanm Mojolicious
 cpanm Moose
+# list taken from Task::Moose
+cpanm MooseX::StrictConstructor
+cpanm MooseX::Params::Validate
+cpanm MooseX::Role::TraitConstructor
+cpanm MooseX::Traits
+cpanm MooseX::Object::Pluggable
+cpanm MooseX::Role::Parameterized
+cpanm MooseX::GlobRef
+cpanm MooseX::InsideOut
+cpanm MooseX::Singleton
+cpanm MooseX::NonMoose
+cpanm MooseX::Declare
+cpanm MooseX::Method::Signatures
+cpanm TryCatch
+cpanm MooseX::Types
+cpanm MooseX::Types::Structured
+cpanm MooseX::Types::Path::Class
+cpanm MooseX::Types::Set::Object
+cpanm MooseX::Types::DateTime
+cpanm MooseX::Getopt
+cpanm MooseX::ConfigFromFile
+cpanm MooseX::SimpleConfig
+cpanm MooseX::App::Cmd
+cpanm MooseX::Role::Cmd
+cpanm MooseX::LogDispatch
+cpanm MooseX::LazyLogDispatch
+cpanm MooseX::Log::Log4perl
+# cpanm MooseX::POE
+cpanm MooseX::Workers
+cpanm MooseX::Daemonize
+cpanm MooseX::Param
+cpanm MooseX::Iterator
+cpanm MooseX::Clone
+cpanm MooseX::Storage
+cpanm Moose::Autobox
+cpanm MooseX::ClassAttribute
+cpanm MooseX::SemiAffordanceAccessor
+cpanm namespace::autoclean
+cpanm Pod::Coverage::Moose
+
 cpanm Net::Server
 cpanm IO::Compress::Gzip
 cpanm IO::Uncompress::Gunzip
@@ -332,4 +372,6 @@ mv $BACKUP $ROOT
 
 
 # Read: http://www.davidpashley.com/articles/writing-robust-shell-scripts/
+# See also Task::Kensho
+
 
