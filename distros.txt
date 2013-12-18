@@ -43,12 +43,7 @@ WWW::Mechanize::TreeBuilder
 XML::Atom
 XML::Entities
 XML::Generator::PerlData
-XML::LibXML
 XML::LibXSLT
 XML::RSS
-XML::SAX
-XML::SAX::Writer
-XML::Simple
-XML::XPath
 local::lib;          liblocal-lib-perl;
 version;             libversion-perl;
