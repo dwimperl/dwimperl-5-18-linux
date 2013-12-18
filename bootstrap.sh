@@ -136,6 +136,14 @@ if [ ! -f $PREFIX_PERL/bin/cpanm ]; then
     curl -L http://cpanmin.us | perl - App::cpanminus
 fi
 
+if [ "$1" != "" ]; then
+    for name in $@; do
+        cpanm $name
+    done
+    exit;
+fi
+
+
 # install the easy modules
 cpanm Test::Deep
 cpanm Test::Exception
@@ -201,6 +209,7 @@ cpanm HTTP::Tiny
 cpanm JSON
 
 #OPENSSL_PREFIX=$PREFIX_C cpanm Net::SSLeay
+#cpanm Business::PayPal needs Net::SSLeay
 #cpanm LWP::Protocol::https
 cpanm LWP::UserAgent
 cpanm LWP::UserAgent::Determined
@@ -221,7 +230,7 @@ cpanm Plack
 cpanm Plack::Middleware::Debug
 cpanm Plack::Middleware::LogErrors
 cpanm Plack::Middleware::LogWarn
-cpanm POE
+# cpanm POE   POE-1.358  failed
 
 cpanm Starman
 cpanm Storable
@@ -250,13 +259,16 @@ cpanm XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/inc
 
 
 # XML::Parser need expat http://sourceforge.net/projects/expat/
-EXPAT=expat-2.1.0
-wget http://downloads.sourceforge.net/project/expat/expat/2.1.0/$EXPAT.tar.gz
-tar xzf $EXPAT.tar.gz
-cd $EXPAT
-./configure --prefix $PREFIX_C
-make
-make install
+
+if [ ! -f $PREFIX_C/lib/libexpat.a ]; then
+    EXPAT=expat-2.1.0
+    wget http://downloads.sourceforge.net/project/expat/expat/2.1.0/$EXPAT.tar.gz
+    tar xzf $EXPAT.tar.gz
+    cd $EXPAT
+    ./configure --prefix $PREFIX_C
+    make
+    make install
+fi
 # If you ever happen to want to link against installed libraries
 # in a given directory, LIBDIR, you must either use libtool, and
 # specify the full pathname of the library, or use the `-LLIBDIR'
@@ -271,12 +283,18 @@ make install
 # See any operating system documentation about shared libraries for
 # more information, such as the ld(1) and ld.so(8) manual pages.
 
-cpanm XML::Parser --configre-args = "EXPATLIBPATH=$PREFIX_C/lib EXPATINCPATH=$PREFIX_C/include"
+#cpanm XML::Parser --configre-args = "EXPATLIBPATH=$PREFIX_C/lib EXPATINCPATH=$PREFIX_C/include"
 
 cpanm XML::SAX::Writer
-cpanm XML::Simple
-cpanm XML::XPath
+# cpanm XML::Simple needs XML::Parser
+# cpanm XML::XPath  needs XML::Parser
 
+cpanm Acme::MetaSyntactic
+cpanm DBIx::RunSQL
+cpanm Hash::Merge::Simple
+#cpanm Geo::IP
+#cpanm Dancer
+#cpanm MIME::Lite
 
 # Finished installing Perl modules, let's test now and create the tarball
 

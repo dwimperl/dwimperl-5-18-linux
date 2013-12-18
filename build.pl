@@ -9,7 +9,7 @@ my $start_time = time;
 foreach my $src ('bootstrap.sh', 'README.txt', 'empty.pod', 't/' ) {
 	system "scp -q $options -r $src $remote:";
 }
-system "ssh $options $remote ./bootstrap.sh";
+system "ssh $options $remote ./bootstrap.sh @ARGV";
 my $end_time = time;
 printf "Elapsed time: %s\n", ($end_time - $start_time)
 
