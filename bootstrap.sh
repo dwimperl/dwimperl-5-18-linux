@@ -113,7 +113,7 @@ if [ ! -f $PREFIX_C/lib/libssl.a ]; then
     cp $BUILD_HOME/empty.pod doc/apps/
     cp $BUILD_HOME/empty.pod doc/crypto/
     cp $BUILD_HOME/empty.pod doc/ssl/
-    ./config --prefix=/opt/dwimperl-5.18.1-1-x86_64/c/ -fPIC
+    ./config --prefix=$PREFIX_C -fPIC
     make
     make test
     make install
