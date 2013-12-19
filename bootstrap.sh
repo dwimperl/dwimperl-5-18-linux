@@ -18,6 +18,8 @@ ORIGINAL_PATH=$PATH
 TEST_DIR=/opt/myperl
 BACKUP=/opt/dwimperl
 
+cpanm=$PREFIX_PERL/bin/cpanm
+
 echo "export PATH=$PREFIX_PERL/bin:\$PATH" > setpath
 
 if [ -d $TEST_DIR ]; then
@@ -138,181 +140,181 @@ fi
 
 if [ "$1" != "" ]; then
     for name in $@; do
-        cpanm $name
+        $cpanm $name
     done
     exit;
 fi
 
 
 # install the easy modules
-cpanm Test::Deep
-cpanm Test::Exception
-cpanm Test::Fatal
-cpanm Test::Memory::Cycle
-cpanm Test::MockObject
-cpanm Test::More
-cpanm Test::Most
-cpanm Test::NoWarnings
-cpanm Test::Output
-cpanm Test::Perl::Critic
-cpanm Test::Pod
-cpanm Test::Pod::Coverage
-cpanm Test::Requires
-cpanm Test::Script
-cpanm Test::WWW::Mechanize
+$cpanm Test::Deep
+$cpanm Test::Exception
+$cpanm Test::Fatal
+$cpanm Test::Memory::Cycle
+$cpanm Test::MockObject
+$cpanm Test::More
+$cpanm Test::Most
+$cpanm Test::NoWarnings
+$cpanm Test::Output
+$cpanm Test::Perl::Critic
+$cpanm Test::Pod
+$cpanm Test::Pod::Coverage
+$cpanm Test::Requires
+$cpanm Test::Script
+$cpanm Test::WWW::Mechanize
 
-cpanm App::Ack
-#cpanm App::Nopaste  (dependency WWW::Pastebin::PastebinCom::Create is missing)
-cpanm Flickr::API
-cpanm Path::Tiny
-#cpanm Cache   (DB_File is not installed)
-cpanm Cache::Memcached::Fast
-cpanm Catalyst
-cpanm Carp::Always
-cpanm Config::Tiny
-cpanm Config::Any
-cpanm Config::General
-cpanm Config::Tiny
-cpanm Date::Tiny
-cpanm DateTime
-cpanm DateTime::Tiny
+$cpanm App::Ack
+#$cpanm App::Nopaste  (dependency WWW::Pastebin::PastebinCom::Create is missing)
+$cpanm Flickr::API
+$cpanm Path::Tiny
+#$cpanm Cache   (DB_File is not installed)
+$cpanm Cache::Memcached::Fast
+$cpanm Catalyst
+$cpanm Carp::Always
+$cpanm Config::Tiny
+$cpanm Config::Any
+$cpanm Config::General
+$cpanm Config::Tiny
+$cpanm Date::Tiny
+$cpanm DateTime
+$cpanm DateTime::Tiny
 
-cpanm Digest::SHA
-cpanm Digest::SHA1
-cpanm DBI
-cpanm DBIx::Class
-cpanm DBIx::Connector
-cpanm DBD::SQLite
-#cpanm DBD::mysql
-cpanm Daemon::Control
+$cpanm Digest::SHA
+$cpanm Digest::SHA1
+$cpanm DBI
+$cpanm DBIx::Class
+$cpanm DBIx::Connector
+$cpanm DBD::SQLite
+#$cpanm DBD::mysql
+$cpanm Daemon::Control
 
-cpanm Dancer2
+$cpanm Dancer2
 
-cpanm Email::MIME::Kit
-cpanm Email::Sender
-cpanm Email::Simple
+$cpanm Email::MIME::Kit
+$cpanm Email::Sender
+$cpanm Email::Simple
 
-cpanm IO::Socket::INET6
-cpanm Socket6
-cpanm --notest Net::DNS  # prereq of Email::Valid and test fails
-cpanm Email::Valid
-cpanm Excel::Writer::XLSX
+$cpanm IO::Socket::INET6
+$cpanm Socket6
+$cpanm --notest Net::DNS  # prereq of Email::Valid and test fails
+$cpanm Email::Valid
+$cpanm Excel::Writer::XLSX
 
-cpanm HTML::Entities
-cpanm HTML::TableExtract
-cpanm HTML::Template
-cpanm HTTP::Lite
-cpanm HTTP::Request
-cpanm HTTP::Tiny
+$cpanm HTML::Entities
+$cpanm HTML::TableExtract
+$cpanm HTML::Template
+$cpanm HTTP::Lite
+$cpanm HTTP::Request
+$cpanm HTTP::Tiny
 
 
-cpanm JSON
+$cpanm JSON
 
-OPENSSL_PREFIX=$PREFIX_C cpanm Net::SSLeay
-#cpanm Business::PayPal needs Net::SSLeay
-#cpanm LWP::Protocol::https
-cpanm LWP::UserAgent
-cpanm LWP::UserAgent::Determined
+OPENSSL_PREFIX=$PREFIX_C $cpanm Net::SSLeay
+$cpanm Business::PayPal
+$cpanm LWP::Protocol::https
+$cpanm LWP::UserAgent
+$cpanm LWP::UserAgent::Determined
 
-cpanm Moo
-cpanm MooX::Options
-cpanm MooX::late
-cpanm MooX::Singleton
+$cpanm Moo
+$cpanm MooX::Options
+$cpanm MooX::late
+$cpanm MooX::Singleton
 
-cpanm Mojolicious
-cpanm Moose
+$cpanm Mojolicious
+$cpanm Moose
 # list taken from Task::Moose
-cpanm MooseX::StrictConstructor
-cpanm MooseX::Params::Validate
-cpanm MooseX::Role::TraitConstructor
-cpanm MooseX::Traits
-cpanm MooseX::Object::Pluggable
-cpanm MooseX::Role::Parameterized
-cpanm MooseX::GlobRef
-cpanm MooseX::InsideOut
-cpanm MooseX::Singleton
-cpanm MooseX::NonMoose
-cpanm MooseX::Declare
-cpanm MooseX::Method::Signatures
-cpanm TryCatch
-cpanm MooseX::Types
-cpanm MooseX::Types::Structured
-cpanm MooseX::Types::Path::Class
-cpanm MooseX::Types::Set::Object
-cpanm MooseX::Types::DateTime
-cpanm MooseX::Getopt
-cpanm MooseX::ConfigFromFile
-cpanm MooseX::SimpleConfig
-cpanm MooseX::App::Cmd
-cpanm MooseX::Role::Cmd
-cpanm MooseX::LogDispatch
-cpanm MooseX::LazyLogDispatch
-cpanm MooseX::Log::Log4perl
-# cpanm MooseX::POE
-cpanm MooseX::Workers
-cpanm MooseX::Daemonize
-cpanm MooseX::Param
-cpanm MooseX::Iterator
-cpanm MooseX::Clone
-cpanm MooseX::Storage
-cpanm Moose::Autobox
-cpanm MooseX::ClassAttribute
-cpanm MooseX::SemiAffordanceAccessor
-cpanm namespace::autoclean
-cpanm Pod::Coverage::Moose
+$cpanm MooseX::StrictConstructor
+$cpanm MooseX::Params::Validate
+$cpanm MooseX::Role::TraitConstructor
+$cpanm MooseX::Traits
+$cpanm MooseX::Object::Pluggable
+$cpanm MooseX::Role::Parameterized
+$cpanm MooseX::GlobRef
+$cpanm MooseX::InsideOut
+$cpanm MooseX::Singleton
+$cpanm MooseX::NonMoose
+$cpanm MooseX::Declare
+$cpanm MooseX::Method::Signatures
+$cpanm TryCatch
+$cpanm MooseX::Types
+$cpanm MooseX::Types::Structured
+$cpanm MooseX::Types::Path::Class
+$cpanm MooseX::Types::Set::Object
+$cpanm MooseX::Types::DateTime
+$cpanm MooseX::Getopt
+$cpanm MooseX::ConfigFromFile
+$cpanm MooseX::SimpleConfig
+$cpanm MooseX::App::Cmd
+$cpanm MooseX::Role::Cmd
+$cpanm MooseX::LogDispatch
+$cpanm MooseX::LazyLogDispatch
+$cpanm MooseX::Log::Log4perl
+# $cpanm MooseX::POE
+$cpanm MooseX::Workers
+$cpanm MooseX::Daemonize
+$cpanm MooseX::Param
+$cpanm MooseX::Iterator
+$cpanm MooseX::Clone
+$cpanm MooseX::Storage
+$cpanm Moose::Autobox
+$cpanm MooseX::ClassAttribute
+$cpanm MooseX::SemiAffordanceAccessor
+$cpanm namespace::autoclean
+$cpanm Pod::Coverage::Moose
 
-cpanm Net::Server
-cpanm IO::Compress::Gzip
-cpanm IO::Uncompress::Gunzip
+$cpanm Net::Server
+$cpanm IO::Compress::Gzip
+$cpanm IO::Uncompress::Gunzip
 
-# cpanm PAR::Packer failed
-cpanm Plack
-cpanm Plack::Middleware::Debug
-cpanm Plack::Middleware::LogErrors
-cpanm Plack::Middleware::LogWarn
-# cpanm POE   POE-1.358  failed
+# $cpanm PAR::Packer failed
+$cpanm Plack
+$cpanm Plack::Middleware::Debug
+$cpanm Plack::Middleware::LogErrors
+$cpanm Plack::Middleware::LogWarn
+# $cpanm POE   POE-1.358  failed
 
-cpanm CGI::FormBuilder::Source::Perl
-# cpanm XML::RSS needs XML::Parser
-# cpanm XML::Atom needs XML::Parser
-cpanm MIME::Types
-cpanm WWW::Mechanize
-cpanm WWW::Mechanize::TreeBuilder
-cpanm DBIx::Class::Schema::Loader
-# cpanm Dist::Zilla   need Net-SSLeay
-cpanm Perl::Tidy
-cpanm Perl::Critic
-cpanm Modern::Perl
-cpanm Perl::Version
-cpanm Software::License
-cpanm CHI
+$cpanm CGI::FormBuilder::Source::Perl
+# $cpanm XML::RSS needs XML::Parser
+# $cpanm XML::Atom needs XML::Parser
+$cpanm MIME::Types
+$cpanm WWW::Mechanize
+$cpanm WWW::Mechanize::TreeBuilder
+$cpanm DBIx::Class::Schema::Loader
+$cpanm Dist::Zilla
+$cpanm Perl::Tidy
+$cpanm Perl::Critic
+$cpanm Modern::Perl
+$cpanm Perl::Version
+$cpanm Software::License
+$cpanm CHI
 
-cpanm Text::Xslate
+$cpanm Text::Xslate
 
-cpanm Starman
-cpanm Storable
-cpanm Spreadsheet::ParseExcel::Simple
-cpanm Spreadsheet::WriteExcel
-cpanm Spreadsheet::WriteExcel::Simple
-cpanm Template
-cpanm Term::ProgressBar::Simple
-cpanm Text::CSV_XS
-cpanm Time::HiRes
-cpanm Time::ParseDate
-cpanm Time::Tiny
-cpanm Try::Tiny
+$cpanm Starman
+$cpanm Storable
+$cpanm Spreadsheet::ParseExcel::Simple
+$cpanm Spreadsheet::WriteExcel
+$cpanm Spreadsheet::WriteExcel::Simple
+$cpanm Template
+$cpanm Term::ProgressBar::Simple
+$cpanm Text::CSV_XS
+$cpanm Time::HiRes
+$cpanm Time::ParseDate
+$cpanm Time::Tiny
+$cpanm Try::Tiny
 
-cpanm Log::Contextual
-cpanm Log::Dispatch
-cpanm Log::Log4perl
+$cpanm Log::Contextual
+$cpanm Log::Dispatch
+$cpanm Log::Log4perl
 
-cpanm XML::NamespaceSupport
-cpanm XML::SAX
+$cpanm XML::NamespaceSupport
+$cpanm XML::SAX
 
-cpanm YAML
+$cpanm YAML
 
 # LIBRARY_PATH
-cpanm XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"
+$cpanm XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"
 
 
 # XML::Parser need expat http://sourceforge.net/projects/expat/
@@ -340,18 +342,18 @@ fi
 # See any operating system documentation about shared libraries for
 # more information, such as the ld(1) and ld.so(8) manual pages.
 
-#cpanm XML::Parser --configre-args = "EXPATLIBPATH=$PREFIX_C/lib EXPATINCPATH=$PREFIX_C/include"
+#$cpanm XML::Parser --configre-args = "EXPATLIBPATH=$PREFIX_C/lib EXPATINCPATH=$PREFIX_C/include"
 
-cpanm XML::SAX::Writer
-# cpanm XML::Simple needs XML::Parser
-# cpanm XML::XPath  needs XML::Parser
+$cpanm XML::SAX::Writer
+# $cpanm XML::Simple needs XML::Parser
+# $cpanm XML::XPath  needs XML::Parser
 
-cpanm Acme::MetaSyntactic
-cpanm DBIx::RunSQL
-cpanm Hash::Merge::Simple
-#cpanm Geo::IP
-#cpanm Dancer
-#cpanm MIME::Lite
+$cpanm Acme::MetaSyntactic
+$cpanm DBIx::RunSQL
+$cpanm Hash::Merge::Simple
+#$cpanm Geo::IP
+#$cpanm Dancer
+#$cpanm MIME::Lite
 
 # Finished installing Perl modules, let's test now and create the tarball
 
