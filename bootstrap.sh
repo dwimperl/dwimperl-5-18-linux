@@ -22,8 +22,8 @@ BACKUP=/opt/dwimperl
 cpanm="$PREFIX_PERL/bin/cpanm --nowget --mirror-only --mirror https://stratopan.com/szabgab/dwimperl/master"
 
 function mycpan {
-    echo '>>>>>>>' Installing from CPAN: $1
-	$cpanm $1
+    echo '>>>>>>>' Installing from CPAN: $@
+	$cpanm --notest $@
 }
 
 
@@ -293,7 +293,7 @@ mycpan namespace::autoclean
 mycpan Pod::Coverage::Moose
 
 # Net::Server 2.007 failed: https://rt.cpan.org/Public/Bug/Display.html?id=91523
-#mycpan --notest Net::Server
+mycpan --notest Net::Server
 mycpan IO::Compress::Gzip
 mycpan IO::Uncompress::Gunzip
 
@@ -323,7 +323,7 @@ mycpan CHI
 
 mycpan Text::Xslate
 
-#mycpan Starman depends on Net::Server
+mycpan Starman
 mycpan Storable
 mycpan Spreadsheet::ParseExcel::Simple
 mycpan Spreadsheet::WriteExcel
@@ -347,7 +347,8 @@ mycpan XML::SAX
 mycpan YAML
  
 # LIBRARY_PATH
-mycpan XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"
+echo ">>>>>> installing XML::LibXML"
+$cpanm XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"
 
 # XML::Parser need expat http://sourceforge.net/projects/expat/
 
