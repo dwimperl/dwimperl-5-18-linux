@@ -18,7 +18,14 @@ ORIGINAL_PATH=$PATH
 TEST_DIR=/opt/myperl
 BACKUP=/opt/dwimperl
 
-cpanm=$PREFIX_PERL/bin/cpanm
+
+cpanm="$PREFIX_PERL/bin/cpanm --nowget --mirror-only --mirror https://stratopan.com/szabgab/dwimperl/master"
+
+function mycpan {
+    echo '>>>>>>>' Installing from CPAN: $1
+	$cpanm $1
+}
+
 
 echo "export PATH=$PREFIX_PERL/bin:\$PATH" > setpath
 
@@ -26,6 +33,9 @@ if [ -d $TEST_DIR ]; then
     echo $TEST_DIR already exists. Exiting!
     exit
 fi
+
+echo $PREFIX_PERL
+echo $cpanm
 
 #echo $BUILD_HOME
 #echo $PERL_SOURCE_ZIP_FILE
@@ -42,7 +52,7 @@ for tool in gcc make cmake; do
     }
 done
 
-mkdir -p PREFIX_C
+mkdir -p $PREFIX_C
 
 # download and install perl
 if [ ! -d $PREFIX_PERL ]; then
@@ -61,6 +71,10 @@ if [ ! -d $PREFIX_PERL ]; then
     make test
     make install
     cd $BUILD_HOME
+fi
+if [ ! -f $PREFIX_PERL/bin/perl ]; then
+    echo "Perl was not installed"
+    exit 1
 fi
 
 export PATH=$PREFIX_PERL/bin:$ORIGINAL_PATH
@@ -81,6 +95,10 @@ if [ ! -f $PREFIX_C/lib/libxml2.a ]; then
     make install
     cd $BUILD_HOME
 fi
+if [ ! -f $PREFIX_C/lib/libxml2.a ]; then
+    echo "libxml2 not installed"
+    exit 1
+fi
 
 # See http://www.zlib.net/
 if [ ! -f $PREFIX_C/lib/libz.a ]; then
@@ -92,6 +110,10 @@ if [ ! -f $PREFIX_C/lib/libz.a ]; then
     make
     make install
     cd $BUILD_HOME
+fi
+if [ ! -f $PREFIX_C/lib/libz.a ]; then
+    echo "zlib not installed"
+    exit 1
 fi
 
 
@@ -120,6 +142,10 @@ if [ ! -f $PREFIX_C/lib/libssl.a ]; then
     make test
     make install
 fi
+if [ ! -f $PREFIX_C/lib/libssl.a ]; then
+    echo "openssl not installed"
+    exit 1
+fi
 
 
 
@@ -140,182 +166,188 @@ fi
 
 if [ "$1" != "" ]; then
     for name in $@; do
-        $cpanm $name
+        mycpan $name
     done
     exit;
 fi
 
 
 # install the easy modules
-$cpanm Test::Deep
-$cpanm Test::Exception
-$cpanm Test::Fatal
-$cpanm Test::Memory::Cycle
-$cpanm Test::MockObject
-$cpanm Test::More
-$cpanm Test::Most
-$cpanm Test::NoWarnings
-$cpanm Test::Output
-$cpanm Test::Perl::Critic
-$cpanm Test::Pod
-$cpanm Test::Pod::Coverage
-$cpanm Test::Requires
-$cpanm Test::Script
-$cpanm Test::WWW::Mechanize
+mycpan Test::Deep
+mycpan Test::Exception
+mycpan Test::Fatal
+mycpan Test::Memory::Cycle
+mycpan Test::MockObject
+mycpan Test::More
+mycpan Test::Most
+mycpan Test::NoWarnings
+mycpan Test::Output
+mycpan Test::Perl::Critic
+mycpan Test::Pod
+mycpan Test::Pod::Coverage
+mycpan Test::Requires
+mycpan Test::Script
+mycpan Test::WWW::Mechanize
 
-$cpanm App::Ack
-#$cpanm App::Nopaste  (dependency WWW::Pastebin::PastebinCom::Create is missing)
-$cpanm Flickr::API
-$cpanm Path::Tiny
-#$cpanm Cache   (DB_File is not installed)
-$cpanm Cache::Memcached::Fast
-$cpanm Catalyst
-$cpanm Carp::Always
-$cpanm Config::Tiny
-$cpanm Config::Any
-$cpanm Config::General
-$cpanm Config::Tiny
-$cpanm Date::Tiny
-$cpanm DateTime
-$cpanm DateTime::Tiny
+mycpan App::Ack
+#mycpan App::Nopaste  (dependency WWW::Pastebin::PastebinCom::Create is missing)
+mycpan Flickr::API
+mycpan Path::Tiny
+#mycpan Cache   (DB_File is not mycpaned)
+mycpan Cache::Memcached::Fast
+mycpan Catalyst
+mycpan Carp::Always
+mycpan Config::Any
+mycpan Config::General
+mycpan Config::Tiny
+mycpan Date::Tiny
+mycpan DateTime
+mycpan DateTime::Tiny
 
-$cpanm Digest::SHA
-$cpanm Digest::SHA1
-$cpanm DBI
-$cpanm DBIx::Class
-$cpanm DBIx::Connector
-$cpanm DBD::SQLite
-#$cpanm DBD::mysql
-$cpanm Daemon::Control
+mycpan Digest::SHA
+mycpan Digest::SHA1
+mycpan DBI
+mycpan DBIx::Class
+mycpan DBIx::Connector
+mycpan DBD::SQLite
+#mycpan DBD::mysql
+mycpan Daemon::Control
 
-$cpanm Dancer2
+mycpan Dancer2
 
-$cpanm Email::MIME::Kit
-$cpanm Email::Sender
-$cpanm Email::Simple
+mycpan Email::MIME::Kit
+mycpan Email::Sender
+mycpan Email::Simple
 
-$cpanm IO::Socket::INET6
-$cpanm Socket6
-$cpanm --notest Net::DNS  # prereq of Email::Valid and test fails
-$cpanm Email::Valid
-$cpanm Excel::Writer::XLSX
+mycpan IO::Socket::INET6
+mycpan Socket6
+mycpan Net::DNS
+mycpan Email::Valid
+mycpan Excel::Writer::XLSX
 
-$cpanm HTML::Entities
-$cpanm HTML::TableExtract
-$cpanm HTML::Template
-$cpanm HTTP::Lite
-$cpanm HTTP::Request
-$cpanm HTTP::Tiny
+mycpan HTML::Entities
+mycpan HTML::TableExtract
+mycpan HTML::Template
+mycpan HTTP::Lite
+mycpan HTTP::Request
+mycpan HTTP::Tiny
 
 
-$cpanm JSON
+mycpan JSON
+ 
+OPENSSL_PREFIX=$PREFIX_C mycpan Net::SSLeay
+mycpan Business::PayPal
+mycpan LWP::Protocol::https
+mycpan LWP::UserAgent
+mycpan LWP::UserAgent::Determined
+ 
+mycpan Moo
+mycpan MooX::Options
+mycpan MooX::late
+mycpan MooX::Singleton
 
-OPENSSL_PREFIX=$PREFIX_C $cpanm Net::SSLeay
-$cpanm Business::PayPal
-$cpanm LWP::Protocol::https
-$cpanm LWP::UserAgent
-$cpanm LWP::UserAgent::Determined
 
-$cpanm Moo
-$cpanm MooX::Options
-$cpanm MooX::late
-$cpanm MooX::Singleton
+# POE-1.358  failed
+# mycpan POE
 
-$cpanm Mojolicious
-$cpanm Moose
+mycpan Mojolicious
+mycpan Moose
 # list taken from Task::Moose
-$cpanm MooseX::StrictConstructor
-$cpanm MooseX::Params::Validate
-$cpanm MooseX::Role::TraitConstructor
-$cpanm MooseX::Traits
-$cpanm MooseX::Object::Pluggable
-$cpanm MooseX::Role::Parameterized
-$cpanm MooseX::GlobRef
-$cpanm MooseX::InsideOut
-$cpanm MooseX::Singleton
-$cpanm MooseX::NonMoose
-$cpanm MooseX::Declare
-$cpanm MooseX::Method::Signatures
-$cpanm TryCatch
-$cpanm MooseX::Types
-$cpanm MooseX::Types::Structured
-$cpanm MooseX::Types::Path::Class
-$cpanm MooseX::Types::Set::Object
-$cpanm MooseX::Types::DateTime
-$cpanm MooseX::Getopt
-$cpanm MooseX::ConfigFromFile
-$cpanm MooseX::SimpleConfig
-$cpanm MooseX::App::Cmd
-$cpanm MooseX::Role::Cmd
-$cpanm MooseX::LogDispatch
-$cpanm MooseX::LazyLogDispatch
-$cpanm MooseX::Log::Log4perl
-# $cpanm MooseX::POE
-$cpanm MooseX::Workers
-$cpanm MooseX::Daemonize
-$cpanm MooseX::Param
-$cpanm MooseX::Iterator
-$cpanm MooseX::Clone
-$cpanm MooseX::Storage
-$cpanm Moose::Autobox
-$cpanm MooseX::ClassAttribute
-$cpanm MooseX::SemiAffordanceAccessor
-$cpanm namespace::autoclean
-$cpanm Pod::Coverage::Moose
+mycpan MooseX::StrictConstructor
+mycpan MooseX::Params::Validate
+mycpan MooseX::Role::TraitConstructor
+mycpan MooseX::Traits
+mycpan MooseX::Object::Pluggable
+mycpan MooseX::Role::Parameterized
+mycpan MooseX::GlobRef
+mycpan MooseX::InsideOut
+mycpan MooseX::Singleton
+mycpan MooseX::NonMoose
+mycpan MooseX::Declare
+mycpan MooseX::Method::Signatures
+mycpan TryCatch
+mycpan MooseX::Types
+mycpan MooseX::Types::Structured
+mycpan MooseX::Types::Path::Class
+mycpan MooseX::Types::Set::Object
+mycpan MooseX::Types::DateTime
+mycpan MooseX::Getopt
+mycpan MooseX::ConfigFromFile
+mycpan MooseX::SimpleConfig
+mycpan MooseX::App::Cmd
+mycpan MooseX::Role::Cmd
+mycpan MooseX::LogDispatch
+mycpan MooseX::LazyLogDispatch
+mycpan MooseX::Log::Log4perl
+# mycpan MooseX::POE
+# mycpan MooseX::Workers depends on POE
+mycpan MooseX::Daemonize
+mycpan MooseX::Param
+mycpan MooseX::Iterator
+mycpan MooseX::Clone
+mycpan MooseX::Storage
+#???  mycpan Moose::Autobox
+mycpan MooseX::ClassAttribute
+mycpan MooseX::SemiAffordanceAccessor
+mycpan namespace::autoclean
+mycpan Pod::Coverage::Moose
 
-$cpanm Net::Server
-$cpanm IO::Compress::Gzip
-$cpanm IO::Uncompress::Gunzip
+# Net::Server 2.007 failed: https://rt.cpan.org/Public/Bug/Display.html?id=91523
+#mycpan --notest Net::Server
+mycpan IO::Compress::Gzip
+mycpan IO::Uncompress::Gunzip
 
-# $cpanm PAR::Packer failed
-$cpanm Plack
-$cpanm Plack::Middleware::Debug
-$cpanm Plack::Middleware::LogErrors
-$cpanm Plack::Middleware::LogWarn
-# $cpanm POE   POE-1.358  failed
+# mycpan PAR::Packer failed
+mycpan Plack
+mycpan Plack::Middleware::Debug
+mycpan Plack::Middleware::LogErrors
+mycpan Plack::Middleware::LogWarn
 
-$cpanm CGI::FormBuilder::Source::Perl
-# $cpanm XML::RSS needs XML::Parser
-# $cpanm XML::Atom needs XML::Parser
-$cpanm MIME::Types
-$cpanm WWW::Mechanize
-$cpanm WWW::Mechanize::TreeBuilder
-$cpanm DBIx::Class::Schema::Loader
-$cpanm Dist::Zilla
-$cpanm Perl::Tidy
-$cpanm Perl::Critic
-$cpanm Modern::Perl
-$cpanm Perl::Version
-$cpanm Software::License
-$cpanm CHI
+# CGI::FormBuilder: lots of warnings like this:
+# /bin/tar: Ignoring unknown extended header keyword `SCHILY.ino'
+#### mycpan CGI::FormBuilder
+mycpan CGI::FormBuilder::Source::Perl
+# mycpan XML::RSS needs XML::Parser
+# mycpan XML::Atom needs XML::Parser
+mycpan MIME::Types
+mycpan WWW::Mechanize
+mycpan WWW::Mechanize::TreeBuilder
+mycpan DBIx::Class::Schema::Loader
+mycpan Dist::Zilla
+mycpan Perl::Tidy
+mycpan Perl::Critic
+mycpan Modern::Perl
+mycpan Perl::Version
+mycpan Software::License
+mycpan CHI
 
-$cpanm Text::Xslate
+mycpan Text::Xslate
 
-$cpanm Starman
-$cpanm Storable
-$cpanm Spreadsheet::ParseExcel::Simple
-$cpanm Spreadsheet::WriteExcel
-$cpanm Spreadsheet::WriteExcel::Simple
-$cpanm Template
-$cpanm Term::ProgressBar::Simple
-$cpanm Text::CSV_XS
-$cpanm Time::HiRes
-$cpanm Time::ParseDate
-$cpanm Time::Tiny
-$cpanm Try::Tiny
+#mycpan Starman depends on Net::Server
+mycpan Storable
+mycpan Spreadsheet::ParseExcel::Simple
+mycpan Spreadsheet::WriteExcel
+mycpan Spreadsheet::WriteExcel::Simple
+mycpan Template
+mycpan Term::ProgressBar::Simple
+mycpan Text::CSV
+mycpan Text::CSV_XS
+mycpan Time::HiRes
+mycpan Time::ParseDate
+mycpan Time::Tiny
+mycpan Try::Tiny
 
-$cpanm Log::Contextual
-$cpanm Log::Dispatch
-$cpanm Log::Log4perl
+mycpan Log::Contextual
+mycpan Log::Dispatch
+mycpan Log::Log4perl
 
-$cpanm XML::NamespaceSupport
-$cpanm XML::SAX
-
-$cpanm YAML
-
+mycpan XML::NamespaceSupport
+mycpan XML::SAX
+ 
+mycpan YAML
+ 
 # LIBRARY_PATH
-$cpanm XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"
-
+mycpan XML::LibXML --configure-args "LIBS='-L$PREFIX_C/lib/' INC='-I$PREFIX_C/include/ -I/$PREFIX_C/include/libxml2'"
 
 # XML::Parser need expat http://sourceforge.net/projects/expat/
 
@@ -342,18 +374,18 @@ fi
 # See any operating system documentation about shared libraries for
 # more information, such as the ld(1) and ld.so(8) manual pages.
 
-#$cpanm XML::Parser --configre-args = "EXPATLIBPATH=$PREFIX_C/lib EXPATINCPATH=$PREFIX_C/include"
+#mycpan XML::Parser --configre-args = "EXPATLIBPATH=$PREFIX_C/lib EXPATINCPATH=$PREFIX_C/include"
 
-$cpanm XML::SAX::Writer
-# $cpanm XML::Simple needs XML::Parser
-# $cpanm XML::XPath  needs XML::Parser
+#  mycpan XML::SAX::Writer
+#  # mycpan XML::Simple needs XML::Parser
+#  # mycpan XML::XPath  needs XML::Parser
 
-$cpanm Acme::MetaSyntactic
-$cpanm DBIx::RunSQL
-$cpanm Hash::Merge::Simple
-#$cpanm Geo::IP
-#$cpanm Dancer
-#$cpanm MIME::Lite
+mycpan Acme::MetaSyntactic
+mycpan DBIx::RunSQL
+mycpan Hash::Merge::Simple
+#mycpan Geo::IP
+#mycpan Dancer
+#mycpan MIME::Lite
 
 # Finished installing Perl modules, let's test now and create the tarball
 
@@ -388,9 +420,4 @@ cd $BUILD_HOME
 rm -rf $TEST_DIR
 
 mv $BACKUP $ROOT
-
-
-# Read: http://www.davidpashley.com/articles/writing-robust-shell-scripts/
-# See also Task::Kensho
-
 
