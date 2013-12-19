@@ -39,8 +39,9 @@ Known issues:
 
 Besides the need of LD_LIBRARY_PATH work around (see above),
 the sh-bang lines of all the scripts in the perl/bin directory
-apoint to where the perl was originally compiled.
+point to where the perl was originally compiled.
 They should be relocated after unzipping this distribution.
 
-The cpanm was installed but it is probably not working.
+cpanm was installed but it is probably not working on your system.
+
 

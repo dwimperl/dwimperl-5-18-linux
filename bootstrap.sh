@@ -208,7 +208,7 @@ cpanm HTTP::Tiny
 
 cpanm JSON
 
-#OPENSSL_PREFIX=$PREFIX_C cpanm Net::SSLeay
+OPENSSL_PREFIX=$PREFIX_C cpanm Net::SSLeay
 #cpanm Business::PayPal needs Net::SSLeay
 #cpanm LWP::Protocol::https
 cpanm LWP::UserAgent
