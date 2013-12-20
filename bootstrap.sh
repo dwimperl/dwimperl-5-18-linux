@@ -19,7 +19,7 @@ TEST_DIR=/opt/myperl
 BACKUP=/opt/dwimperl
 
 
-cpanm="$PREFIX_PERL/bin/cpanm --nowget --mirror-only --mirror https://stratopan.com/szabgab/dwimperl/master"
+cpanm="$PREFIX_PERL/bin/cpanm --mirror-only --mirror https://stratopan.com/szabgab/dwimperl/master"
 
 function mycpan {
     echo '>>>>>>>' Installing from CPAN: $@
