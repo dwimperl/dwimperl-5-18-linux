@@ -180,6 +180,7 @@ mycpan Test::Memory::Cycle
 mycpan Test::MockObject
 mycpan Test::More
 mycpan Test::Most
+mycpan Test::Warn
 mycpan Test::NoWarnings
 mycpan Test::Output
 mycpan Test::Perl::Critic
@@ -421,4 +422,70 @@ cd $BUILD_HOME
 rm -rf $TEST_DIR
 
 mv $BACKUP $ROOT
+
+# Most of the requirements of Padre
+# ExtUtils::MakeMaker
+# ExtUtils::Embed
+# ExtUtils::Manifest
+# Algorithm::Diff
+# Capture::Tiny
+# CGI
+# Class::Adapter
+# Class::Inspector
+# Class::XSAccessor
+# Debug::Client
+# Devel::Dumpvar
+# Devel::Refactor
+# Encode
+# File::Copy::Recursive
+# File::Find::Rule
+# File::Path
+# File::ShareDir
+# File::Which
+# File::pushd
+# File::HomeDir
+# File::Remove
+# HTML::Parser
+# IO::Socket
+# IO::String
+# IPC::Run
+# JSON::XS
+# List::MoreUtils
+# LWP
+# Module::Build
+# Module::CoreList
+# Module::Manifest
+# Module::Starter
+# ORLite
+# ORLite::Migrate
+# Params::Util
+# Parse::ErrorString::Perl
+# Parse::ExuberantCTags
+# Pod::POM
+# Pod::Simple
+# Pod::Simple::XHTML
+# Pod::Abstract
+# Pod::Perldoc
+# POD2::Base
+# PPI
+# PPIx::EditorTools
+# PPIx::Regexp
+# Probe::Perl
+# Storable
+# Sort::Versions
+# Template::Tiny
+# Term::ReadLine
+# Text::Balanced
+# Text::Diff
+# Text::FindIndent
+# Text::Patch
+# URI
+# version
+# YAML::Tiny
+# IO::Scalar
+# 
+# # Win32
+# # Win32::Shortcut
+# # Win32::TieRegistry
+# # File::Glob::Windows
 
