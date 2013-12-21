@@ -20,10 +20,14 @@ BACKUP=/opt/dwimperl
 
 
 cpanm="$PREFIX_PERL/bin/cpanm --mirror-only --mirror https://stratopan.com/szabgab/dwimperl/master"
+#cpanm="$PREFIX_PERL/bin/cpanm"
 
 function mycpan {
     echo '>>>>>>>' Installing from CPAN: $@
-	$cpanm --notest $@
+	$cpanm --notest $@ || {
+        echo "Failed to install $@";
+        exit 1;
+    }
 }
 
 
@@ -189,6 +193,9 @@ mycpan Test::Pod::Coverage
 mycpan Test::Requires
 mycpan Test::Script
 mycpan Test::WWW::Mechanize
+mycpan Test::Mock::LWP
+mycpan Test::MockModule
+mycpan Test::LongString
 
 mycpan App::Ack
 #mycpan App::Nopaste  (dependency WWW::Pastebin::PastebinCom::Create is missing)
@@ -198,6 +205,8 @@ mycpan Path::Tiny
 mycpan Cache::Memcached::Fast
 mycpan Catalyst
 mycpan Carp::Always
+mycpan Carp::Assert
+mycpan Carp::Assert::More
 mycpan Config::Any
 mycpan Config::General
 mycpan Config::Tiny
@@ -303,6 +312,7 @@ mycpan Plack
 mycpan Plack::Middleware::Debug
 mycpan Plack::Middleware::LogErrors
 mycpan Plack::Middleware::LogWarn
+mycpan Plack::Middleware::ReverseProxy
 
 # CGI::FormBuilder: lots of warnings like this:
 # /bin/tar: Ignoring unknown extended header keyword `SCHILY.ino'
@@ -389,6 +399,76 @@ mycpan Hash::Merge::Simple
 #mycpan Dancer
 #mycpan MIME::Lite
 
+mycpan Devel::Cycle
+
+# Most of the requirements of Padre
+mycpan ExtUtils::MakeMaker
+mycpan ExtUtils::Embed
+mycpan ExtUtils::Manifest
+mycpan Algorithm::Diff
+mycpan Capture::Tiny
+mycpan CGI
+mycpan Class::Adapter
+mycpan Class::Inspector
+mycpan Class::XSAccessor
+# Needs Term::Readline::Gnu but that fails because:
+# Could not find neither libtermcap.a, libncurses.a, or libcurses.
+# mycpan Debug::Client
+mycpan Devel::Dumpvar
+mycpan Devel::Refactor
+mycpan Encode
+mycpan File::Copy::Recursive
+mycpan File::Find::Rule
+mycpan File::Path
+mycpan File::ShareDir
+mycpan File::Which
+mycpan File::pushd
+mycpan File::HomeDir
+mycpan File::Remove
+mycpan HTML::Parser
+mycpan IO::Socket
+mycpan IO::String
+mycpan IPC::Run
+mycpan JSON::XS
+mycpan List::MoreUtils
+mycpan LWP
+mycpan Module::Build
+mycpan Module::CoreList
+mycpan Module::Manifest
+mycpan Module::Starter
+mycpan ORLite
+mycpan ORLite::Migrate
+mycpan Params::Util
+mycpan Parse::ErrorString::Perl
+mycpan Parse::ExuberantCTags
+mycpan Pod::POM
+mycpan Pod::Simple
+mycpan Pod::Simple::XHTML
+mycpan Pod::Abstract
+mycpan Pod::Perldoc
+mycpan POD2::Base
+mycpan PPI
+mycpan PPIx::EditorTools
+mycpan PPIx::Regexp
+mycpan Probe::Perl
+mycpan Storable
+mycpan Sort::Versions
+mycpan Template::Tiny
+mycpan Term::ReadLine
+mycpan Text::Balanced
+mycpan Text::Diff
+mycpan Text::FindIndent
+mycpan Text::Patch
+mycpan URI
+mycpan version
+mycpan YAML::Tiny
+mycpan IO::Scalar
+
+# Win32
+# Win32::Shortcut
+# Win32::TieRegistry
+# File::Glob::Windows
+
 # Finished installing Perl modules, let's test now and create the tarball
 
 
@@ -423,69 +503,4 @@ rm -rf $TEST_DIR
 
 mv $BACKUP $ROOT
 
-# Most of the requirements of Padre
-# ExtUtils::MakeMaker
-# ExtUtils::Embed
-# ExtUtils::Manifest
-# Algorithm::Diff
-# Capture::Tiny
-# CGI
-# Class::Adapter
-# Class::Inspector
-# Class::XSAccessor
-# Debug::Client
-# Devel::Dumpvar
-# Devel::Refactor
-# Encode
-# File::Copy::Recursive
-# File::Find::Rule
-# File::Path
-# File::ShareDir
-# File::Which
-# File::pushd
-# File::HomeDir
-# File::Remove
-# HTML::Parser
-# IO::Socket
-# IO::String
-# IPC::Run
-# JSON::XS
-# List::MoreUtils
-# LWP
-# Module::Build
-# Module::CoreList
-# Module::Manifest
-# Module::Starter
-# ORLite
-# ORLite::Migrate
-# Params::Util
-# Parse::ErrorString::Perl
-# Parse::ExuberantCTags
-# Pod::POM
-# Pod::Simple
-# Pod::Simple::XHTML
-# Pod::Abstract
-# Pod::Perldoc
-# POD2::Base
-# PPI
-# PPIx::EditorTools
-# PPIx::Regexp
-# Probe::Perl
-# Storable
-# Sort::Versions
-# Template::Tiny
-# Term::ReadLine
-# Text::Balanced
-# Text::Diff
-# Text::FindIndent
-# Text::Patch
-# URI
-# version
-# YAML::Tiny
-# IO::Scalar
-# 
-# # Win32
-# # Win32::Shortcut
-# # Win32::TieRegistry
-# # File::Glob::Windows
 
