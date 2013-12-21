@@ -463,6 +463,21 @@ mycpan URI
 mycpan version
 mycpan YAML::Tiny
 mycpan IO::Scalar
+mycpan Pod::Usage
+mycpan CPAN::Perl::Releases
+mycpan AnyEvent
+mycpan AnyEvent::HTTP
+mycpan AnyEvent::Ping
+mycpan AnyEvent::Ping::TCP
+mycpan PDF::Create
+mycpan Regexp::Common::time
+mycpan WebService::GData
+mycpan Parallel::ForkManager
+mycpan SVG
+mycpan Net::Ping
+mycpan Test::Ping
+mycpan Net::Traceroute
+
 
 # Win32
 # Win32::Shortcut
